@@ -2,9 +2,9 @@
 
 namespace Homeful\Notifications\Tests;
 
+use Homeful\Notifications\NotificationsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Homeful\Notifications\NotificationsServiceProvider;
 
 class TestCase extends Orchestra
 {

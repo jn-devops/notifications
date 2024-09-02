@@ -2,9 +2,9 @@
 
 namespace Homeful\Notifications;
 
+use Homeful\Notifications\Commands\NotificationsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Homeful\Notifications\Commands\NotificationsCommand;
 
 class NotificationsServiceProvider extends PackageServiceProvider
 {
