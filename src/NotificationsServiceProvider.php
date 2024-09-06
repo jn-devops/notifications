@@ -2,9 +2,9 @@
 
 namespace Homeful\Notifications;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Homeful\Notifications\Commands\NotificationsCommand;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Spatie\LaravelPackageTools\Package;
 
 class NotificationsServiceProvider extends PackageServiceProvider
 {
@@ -17,8 +17,8 @@ class NotificationsServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('notifications')
-            ->hasConfigFile()
-            ->hasViews()
+            ->hasConfigFile(['engagespark', 'notifications'])
+            ->hasViews('homeful')
             ->hasMigration('create_notifications_table')
             ->hasCommand(NotificationsCommand::class);
     }
