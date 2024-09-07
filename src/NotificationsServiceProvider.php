@@ -17,8 +17,9 @@ class NotificationsServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('notifications')
-            ->hasConfigFile(['engagespark', 'notifications'])
+            ->hasConfigFile(['data', 'engagespark', 'notifications'])
             ->hasViews('homeful')
+            ->hasTranslations()
             ->hasMigration('create_notifications_table')
             ->hasCommand(NotificationsCommand::class);
     }
