@@ -1,11 +1,11 @@
 <x-mail::message>
-    <b>Dear Juan,</b><br>
+    <b>Dear {{$reference_data->lead->name}},</b><br>
 
     We've just sent an email to your Co-borrower. Please remind your Co-borrower to complete the form so we can continue the consultation.
 
     Customer Support
 
-    For questions about the property and services you may submit your concern/s tru: https://www.homeful.ph/contact-us
+    For questions about the property and services you may submit your concern/s tru: https://www.homeful.ph/contact-us?reference_code={{$reference_data->code}}
 
     This is an automatically generated email, please do not reply.
     Thanks,

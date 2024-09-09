@@ -2,53 +2,15 @@
 
 namespace Homeful\Notifications\Mails;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailable;
-use Illuminate\Bus\Queueable;
-
-class PrePaymentBuyerMail extends Mailable
+class PrePaymentBuyerMail extends BaseMail
 {
-    use Queueable, SerializesModels;
-
-    /**
-     * Create a new message instance.
-     */
-    public function __construct($notifiable)
+    protected function getSubject(): string
     {
-        $this->to($notifiable->email);
-        $this->cc("devops@joy-nostalg.com");
+        return 'Homeful - Payment Instruction for InstaPay';
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
+    protected function getMarkdown(): string
     {
-        return new Envelope(
-            subject: 'Homeful - Payment Instruction for InstaPay',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            markdown: 'homeful::mail.prepayment_buyer',
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
+        return 'homeful::mail.en.prepayment_buyer'; //homeful::mail.en_PH.prepayment_buyer if Taglish
     }
 }

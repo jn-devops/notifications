@@ -2,54 +2,15 @@
 
 namespace Homeful\Notifications\Mails;
 
-
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailable;
-use Illuminate\Bus\Queueable;
-
-class ApprovedBuyerMail extends Mailable
+class ApprovedBuyerMail extends BaseMail
 {
-    use Queueable, SerializesModels;
-
-    /**
-     * Create a new message instance.
-     */
-    public function __construct($notifiable)
+    protected function getSubject(): string
     {
-        $this->to($notifiable->email);
-        $this->cc("devops@joy-nostalg.com");
+        return 'Homeful - Approved Customer';
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
+    protected function getMarkdown(): string
     {
-        return new Envelope(
-            subject: 'Homeful - Approved Customer',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            markdown: 'homeful::mail.approved_buyer',
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
+        return 'homeful::mail.en.approved_buyer'; //homeful::mail.en_PH.approved_buyer if Taglish
     }
 }

@@ -1,5 +1,5 @@
 <x-mail::message>
-    <b>Dear Juan,</b><br>
+    <b>Dear {{$reference_data->lead->name}},</b><br>
 
     Payment successful!
 
@@ -9,7 +9,7 @@
 
     Transaction Summary
 
-    Reference Code:         JN-0921-001
+    Reference Code:         {{$reference_data->code}}
     Name:                   Juan Pedro Dela Cruz
     Contact number:         09478800962
     Project:                Pasinaya
@@ -20,7 +20,7 @@
     Customer Support
 
     For questions about your Home Loan Consultation Application you may submit your concern/s through:
-    https://www.homeful.ph/contact-us?refence_code=JN-0989
+    https://www.homeful.ph/contact-us?reference_code={{$reference_data->code}}
 
     This is an automatically generated email, please do not reply.
     Thanks,

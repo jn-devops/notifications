@@ -1,5 +1,13 @@
 <?php
 
+use Homeful\Notifications\Notifications\AddCoBorrowerBuyerNotification;
+use Homeful\Notifications\Notifications\ApprovedBuyerNotification;
+use Homeful\Notifications\Notifications\CoBorrowerNotification;
+use Homeful\Notifications\Notifications\DocumentSigningBuyerNotification;
+use Homeful\Notifications\Notifications\PostPaymentBuyerNotification;
+use Homeful\Notifications\Notifications\PrePaymentBuyerNotification;
+use Homeful\Notifications\Notifications\QualifiedDocumentBuyerNotification;
+use Homeful\Notifications\Notifications\ReuploadDocumentBuyerNotification;
 use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
 use Homeful\Notifications\Notifications\AcknowledgementReceiptBuyerNotification;
 use Homeful\References\Actions\CreateReferenceAction;
@@ -52,7 +60,7 @@ dataset('reference', function () {
 
 dataset('lead', function () {
     return [
-        [fn () => Lead::factory()->forContact(['email' => 'devops@joy-nostalg.com', 'mobile' => '09173011987'])->create(['id' => LEAD_ID])],
+        [fn () => Lead::factory()->forContact(['email' => 'aacsantos@joy-nostalg.com', 'mobile' => '09467438575'])->create(['id' => LEAD_ID])],
     ];
 });
 
@@ -76,7 +84,40 @@ it('can test', function (Reference $reference, Lead $lead, Contract $contract, S
     $contact = $reference->getLead()->contact;
     if ($contact instanceof Contact) {
         $contact->notify(new AcknowledgementReceiptBuyerNotification($reference_data));
+        $contact->notify(new AddCoBorrowerBuyerNotification($reference_data));
+        $contact->notify(new ApprovedBuyerNotification($reference_data));
+        $contact->notify(new CoBorrowerNotification($reference_data));
+        $contact->notify(new DocumentSigningBuyerNotification($reference_data));
+        $contact->notify(new PostPaymentBuyerNotification($reference_data));
+        $contact->notify(new PrePaymentBuyerNotification($reference_data));
+        $contact->notify(new QualifiedDocumentBuyerNotification($reference_data));
+        $contact->notify(new ReuploadDocumentBuyerNotification($reference_data));
+
         Notification::assertSentTo($contact, AcknowledgementReceiptBuyerNotification::class, function (AcknowledgementReceiptBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, AddCoBorrowerBuyerNotification::class, function (AddCoBorrowerBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, ApprovedBuyerNotification::class, function (ApprovedBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, CoBorrowerNotification::class, function (CoBorrowerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, DocumentSigningBuyerNotification::class, function (DocumentSigningBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, PostPaymentBuyerNotification::class, function (PostPaymentBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, PrePaymentBuyerNotification::class, function (PrePaymentBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, QualifiedDocumentBuyerNotification::class, function (QualifiedDocumentBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, ReuploadDocumentBuyerNotification::class, function (ReuploadDocumentBuyerNotification $notification) use ($reference_data) {
             return $notification->getReferenceData()->code == $reference_data->code;
         });
     }

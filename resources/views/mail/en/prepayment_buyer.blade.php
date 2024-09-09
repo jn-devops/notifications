@@ -1,5 +1,5 @@
 <x-mail::message>
-    <b>Dear Juan,</b><br>
+    <b>Dear {{$reference_data->lead->name}},</b><br>
 
     Thank you for choosing InstaPay as your payment option for your Home Loan Consultation Fee.
 
@@ -14,7 +14,7 @@
     Customer Support
 
     For questions about this payment process, please click the link below:
-    https://www.homeful.ph/contact-us?refence_code=JN-0989
+    https://www.homeful.ph/contact-us?reference_code={{$reference_data->code}}
 
     This is an automatically generated email, please do not reply.
     Thanks,

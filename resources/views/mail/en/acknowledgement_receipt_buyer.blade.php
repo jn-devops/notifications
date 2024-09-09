@@ -9,7 +9,7 @@
     Customer Support
 
     For questions about this payment process, please click the link below:
-    https://www.homeful.ph/contact-us?refence_code={{$reference_data->code}}
+    https://www.homeful.ph/contact-us?reference_code={{$reference_data->code}}
 
     This is an automatically generated email, please do not reply.
     Thanks,
