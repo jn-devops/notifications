@@ -2,6 +2,10 @@
 
 All notable changes to `notifications` will be documented in this file.
 
+## #v1.3.1 - 2024-09-17
+
+remove env file
+
 ## #v1.3.0 - 2024-09-17
 
 Add notifications
