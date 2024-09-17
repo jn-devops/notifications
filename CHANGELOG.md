@@ -2,6 +2,10 @@
 
 All notable changes to `notifications` will be documented in this file.
 
+## #v1.3.0 - 2024-09-17
+
+Add notifications
+
 ## #v1.2.0 - 2024-09-09
 
 Update notifications
