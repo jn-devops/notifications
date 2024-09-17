@@ -20,13 +20,7 @@ use Homeful\Notifications\Notifications\ApprovedToCancelledBuyerNotification;
 use Homeful\Notifications\Notifications\ValidatedToCancelledBuyerNotification;
 use Homeful\Notifications\Notifications\OverriddenToValidatedBuyerNotification;
 use Homeful\Notifications\Notifications\OverriddenToCancelledBuyerNotification;
-
-
-
-
-
 use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
-
 use Homeful\References\Actions\CreateReferenceAction;
 use Illuminate\Support\Facades\Notification;
 use Homeful\Contacts\Models\Contact as Seller;
