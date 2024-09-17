@@ -2,6 +2,10 @@
 
 All notable changes to `notifications` will be documented in this file.
 
+## #v1.3.2 - 2024-09-17
+
+add QR code to verified_to_onboarded notification
+
 ## #v1.3.1 - 2024-09-17
 
 remove env file
