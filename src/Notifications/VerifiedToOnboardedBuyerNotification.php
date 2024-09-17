@@ -3,10 +3,20 @@
 namespace Homeful\Notifications\Notifications;
 
 use Homeful\Notifications\Mails\VerifiedToOnboardedBuyerMail;
+use Homeful\References\Data\ReferenceData;
 use Homeful\Notifications\Mails\BaseMail;
 
 class VerifiedToOnboardedBuyerNotification extends BaseNotification
 {
+    protected string $qr_code_url;
+
+    public function __construct(ReferenceData $reference_data, string $qr_code_url)
+    {
+        parent::__construct($reference_data);
+
+        $this->qr_code_url = $qr_code_url;
+    }
+
     public function getSMSContent(object $notifiable): string
     {
         return trans(
@@ -21,6 +31,11 @@ class VerifiedToOnboardedBuyerNotification extends BaseNotification
 
     public function getMail(object $notifiable): BaseMail
     {
-        return new VerifiedToOnboardedBuyerMail($this->getReferenceData(), $notifiable);
+        return new VerifiedToOnboardedBuyerMail($this->getReferenceData(), $this->getQRCodeUrl(), $notifiable);
+    }
+
+    public function getQRCodeUrl(): string
+    {
+        return $this->qr_code_url;
     }
 }

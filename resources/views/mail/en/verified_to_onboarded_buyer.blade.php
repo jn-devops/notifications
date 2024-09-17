@@ -20,7 +20,8 @@
     Thanks,
     Homeful
 
-{{--    insert qr code/attachment--}}
+![QR Ph]({{$qr_code_url}})
+
 {{--    {{ config('app.name') }}--}}
 </x-mail::message>
 

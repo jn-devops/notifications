@@ -71,7 +71,7 @@ dataset('reference', function () {
 
 dataset('lead', function () {
     return [
-        [fn () => Lead::factory()->forContact(['email' => 'aacsantos@joy-nostalg.com', 'mobile' => '09467438575'])->create(['id' => LEAD_ID])],
+        [fn () => Lead::factory()->forContact(['email' => 'devops@joy-nostalg.com', 'mobile' => '09173011987'])->create(['id' => LEAD_ID])],
     ];
 });
 
@@ -87,14 +87,20 @@ dataset('seller', function () {
     ];
 });
 
-it('can test', function (Reference $reference, Lead $lead, Contract $contract, Seller $seller) {
-//    Notification::fake();
+dataset('qr_code_url', function () {
+    return [
+        [fn () => 'https://pay.wepayez.com/qrcode/code?uuid=18c4185824a70bc58e8f569c0c671b251']
+    ];
+});
+
+it('can test', function (Reference $reference, Lead $lead, Contract $contract, Seller $seller, string $qr_code_url) {
+    Notification::fake();
     $reference->addEntities($lead);
     $reference->addEntities($contract);
     $reference_data = ReferenceData::fromModel($reference);
     $contact = $reference->getLead()->contact;
     if ($contact instanceof Contact) {
-        $contact->notify(new VerifiedToOnboardedBuyerNotification($reference_data));
+        $contact->notify(new VerifiedToOnboardedBuyerNotification($reference_data, $qr_code_url));
         $contact->notify(new OnboardedToPaidBuyerNotification($reference_data));
         $contact->notify(new OnboardedToPaymentFailedBuyerNotification($reference_data));
         $contact->notify(new PaymentFailedToPaidBuyerNotification($reference_data));
@@ -113,12 +119,59 @@ it('can test', function (Reference $reference, Lead $lead, Contract $contract, S
         $contact->notify(new ValidatedToCancelledBuyerNotification($reference_data));
         $contact->notify(new OverriddenToValidatedBuyerNotification($reference_data));
         $contact->notify(new OverriddenToCancelledBuyerNotification($reference_data));
-
-
-
-//        Notification::assertSentTo($contact, VerifiedToOnboardedBuyerNotification::class, function (VerifiedToOnboardedBuyerNotification $notification) use ($reference_data) {
-//            return $notification->getReferenceData()->code == $reference_data->code;
-//        });
-
+        Notification::assertSentTo($contact, VerifiedToOnboardedBuyerNotification::class, function (VerifiedToOnboardedBuyerNotification $notification) use ($reference_data, $qr_code_url) {
+            return $notification->getReferenceData()->code == $reference_data->code && $notification->getQRCodeUrl() == $qr_code_url;
+        });
+        Notification::assertSentTo($contact, OnboardedToPaidBuyerNotification::class, function (OnboardedToPaidBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, OnboardedToPaymentFailedBuyerNotification::class, function (OnboardedToPaymentFailedBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, PaymentFailedToPaidBuyerNotification::class, function (PaymentFailedToPaidBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, AssignedToIdledBuyerNotification::class, function (AssignedToIdledBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, AssignedToAcknowledgedBuyerNotification::class, function (AssignedToAcknowledgedBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, IdledToAcknowledgedBuyerNotification::class, function (IdledToAcknowledgedBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, AcknowledgedToPrequalifiedBuyerNotification::class, function (AcknowledgedToPrequalifiedBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, PrequalifiedToQualifiedBuyerNotification::class, function (PrequalifiedToQualifiedBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, PrequalifiedToNotQualifiedBuyerNotification::class, function (PrequalifiedToNotQualifiedBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, QualifiedToApprovedBuyerNotification::class, function (QualifiedToApprovedBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, QualifiedToDisapprovedBuyerNotification::class, function (QualifiedToDisapprovedBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, DisapprovedToOverriddenBuyerNotification::class, function (DisapprovedToOverriddenBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, ApprovedToValidatedBuyerNotification::class, function (ApprovedToValidatedBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, ApprovedToCancelledBuyerNotification::class, function (ApprovedToCancelledBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, ValidatedToCancelledBuyerNotification::class, function (ValidatedToCancelledBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, OverriddenToValidatedBuyerNotification::class, function (OverriddenToValidatedBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
+        Notification::assertSentTo($contact, OverriddenToCancelledBuyerNotification::class, function (OverriddenToCancelledBuyerNotification $notification) use ($reference_data) {
+            return $notification->getReferenceData()->code == $reference_data->code;
+        });
     }
-})->with('reference', 'lead', 'contract', 'seller');
+})->with('reference', 'lead', 'contract', 'seller', 'qr_code_url');
