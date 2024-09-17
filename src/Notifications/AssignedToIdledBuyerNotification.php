@@ -2,15 +2,15 @@
 
 namespace Homeful\Notifications\Notifications;
 
-use Homeful\Notifications\Mails\ApprovedBuyerMail;
+use Homeful\Notifications\Mails\AssignedToIdledBuyerMail;
 use Homeful\Notifications\Mails\BaseMail;
 
-class ApprovedBuyerNotification extends BaseNotification
+class AssignedToIdledBuyerNotification extends BaseNotification
 {
     public function getSMSContent(object $notifiable): string
     {
         return trans(
-            key: 'notifications::messages.approved_buyer.sms',
+            key: 'notifications::messages.assigned_to_idled_buyer.sms',
             replace: [
                 'name' => $this->getReferenceData()->lead->name,
                 'reference_code' => $this->getReferenceData()->code
@@ -21,6 +21,6 @@ class ApprovedBuyerNotification extends BaseNotification
 
     public function getMail(object $notifiable): BaseMail
     {
-        return new ApprovedBuyerMail($this->getReferenceData(), $notifiable);
+        return new AssignedToIdledBuyerMail($this->getReferenceData(), $notifiable);
     }
 }

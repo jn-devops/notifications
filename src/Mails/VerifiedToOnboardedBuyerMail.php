@@ -2,7 +2,7 @@
 
 namespace Homeful\Notifications\Mails;
 
-class PrePaymentBuyerMail extends BaseMail
+class VerifiedToOnboardedBuyerMail extends BaseMail
 {
     protected function getSubject(): string
     {
@@ -11,6 +11,6 @@ class PrePaymentBuyerMail extends BaseMail
 
     protected function getMarkdown(): string
     {
-        return 'homeful::mail.en.prepayment_buyer'; //homeful::mail.en_PH.prepayment_buyer if Taglish
+        return 'homeful::mail.en.verified_to_onboarded_buyer'; //homeful::mail.en_PH.verified_to_onboarded_buyer if Taglish
     }
 }

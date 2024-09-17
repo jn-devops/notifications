@@ -1,14 +1,11 @@
 <x-mail::message>
     <b>Dear {{$reference_data->lead->name}},</b><br>
 
-    Please find attached copy of your Acknowledgment Receipt for:
-    Reference Code Number: {{$reference_data->code}}
-
-    We will notify you for further details regarding your Home Loan Consultation application.
+    Acknowledged home loan consultation.
 
     Customer Support
 
-    For questions about this payment process, please click the link below:
+    For questions about your Home Loan Consultation Application you may submit your concern/s through:
     https://www.homeful.ph/contact-us?reference_code={{$reference_data->code}}
 
     This is an automatically generated email, please do not reply.

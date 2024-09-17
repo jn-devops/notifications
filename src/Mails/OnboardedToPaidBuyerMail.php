@@ -2,7 +2,7 @@
 
 namespace Homeful\Notifications\Mails;
 
-class PostPaymentBuyerMail extends BaseMail
+class OnboardedToPaidBuyerMail extends BaseMail
 {
     protected function getSubject(): string
     {
@@ -11,6 +11,6 @@ class PostPaymentBuyerMail extends BaseMail
 
     protected function getMarkdown(): string
     {
-        return 'homeful::mail.en.post_payment_buyer'; //homeful::mail.en_PH.post_payment_buyer if Taglish
+        return 'homeful::mail.en.onboarded_to_paid_buyer'; //homeful::mail.en_PH.onboarded_to_paid_buyer if Taglish
     }
 }

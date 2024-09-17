@@ -2,15 +2,15 @@
 
 namespace Homeful\Notifications\Notifications;
 
-use Homeful\Notifications\Mails\PrePaymentBuyerMail;
 use Homeful\Notifications\Mails\BaseMail;
+use Homeful\Notifications\Mails\QualifiedToDisapprovedBuyerMail;
 
-class PrePaymentBuyerNotification extends BaseNotification
+class QualifiedToDisapprovedBuyerNotification extends BaseNotification
 {
     public function getSMSContent(object $notifiable): string
     {
         return trans(
-            key: 'notifications::messages.prepayment_buyer.sms',
+            key: 'notifications::messages.qualified_to_disapproved_buyer.sms',
             replace: [
                 'name' => $this->getReferenceData()->lead->name,
                 'reference_code' => $this->getReferenceData()->code
@@ -21,6 +21,6 @@ class PrePaymentBuyerNotification extends BaseNotification
 
     public function getMail(object $notifiable): BaseMail
     {
-        return new PrePaymentBuyerMail($this->getReferenceData(), $notifiable);
+        return new QualifiedToDisapprovedBuyerMail($this->getReferenceData(), $notifiable);
     }
 }

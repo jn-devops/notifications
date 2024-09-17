@@ -2,15 +2,15 @@
 
 namespace Homeful\Notifications\Notifications;
 
-use Homeful\Notifications\Mails\PostPaymentBuyerMail;
+use Homeful\Notifications\Mails\PaymentFailedToPaidBuyerMail;
 use Homeful\Notifications\Mails\BaseMail;
 
-class PostPaymentBuyerNotification extends BaseNotification
+class PaymentFailedToPaidBuyerNotification extends BaseNotification
 {
     public function getSMSContent(object $notifiable): string
     {
         return trans(
-            key: 'notifications::messages.post_payment_buyer.sms',
+            key: 'notifications::messages.payment_failed_to_paid_buyer.sms',
             replace: [
                 'name' => $this->getReferenceData()->lead->name,
                 'reference_code' => $this->getReferenceData()->code
@@ -21,6 +21,6 @@ class PostPaymentBuyerNotification extends BaseNotification
 
     public function getMail(object $notifiable): BaseMail
     {
-        return new PostPaymentBuyerMail($this->getReferenceData(), $notifiable);
+        return new PaymentFailedToPaidBuyerMail($this->getReferenceData(), $notifiable);
     }
 }

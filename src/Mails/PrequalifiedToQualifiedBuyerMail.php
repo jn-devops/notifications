@@ -2,7 +2,7 @@
 
 namespace Homeful\Notifications\Mails;
 
-class QualifiedDocumentBuyerMail extends BaseMail
+class PrequalifiedToQualifiedBuyerMail extends BaseMail
 {
     protected function getSubject(): string
     {
@@ -11,6 +11,6 @@ class QualifiedDocumentBuyerMail extends BaseMail
 
     protected function getMarkdown(): string
     {
-        return 'homeful::mail.en.qualified_document_buyer'; //homeful::mail.en_PH.qualified_document_buyer if Taglish
+        return 'homeful::mail.en.prequalified_to_qualified_buyer'; //homeful::mail.en_PH.prequalified_to_qualified_buyer if Taglish
     }
 }

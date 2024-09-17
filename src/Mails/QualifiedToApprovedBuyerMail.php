@@ -2,7 +2,7 @@
 
 namespace Homeful\Notifications\Mails;
 
-class DocumentSigningBuyerMail extends BaseMail
+class QualifiedToApprovedBuyerMail extends BaseMail
 {
     protected function getSubject(): string
     {
@@ -11,6 +11,6 @@ class DocumentSigningBuyerMail extends BaseMail
 
     protected function getMarkdown(): string
     {
-        return 'homeful::mail.en.document_signing_buyer'; //homeful::mail.en_PH.document_signing_buyer if Taglish
+        return 'homeful::mail.en.qualified_to_approved_buyer'; //homeful::mail.en_PH.qualified_to_approved_buyer if Taglish
     }
 }

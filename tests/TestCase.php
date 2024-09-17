@@ -62,6 +62,16 @@ class TestCase extends Orchestra
         config()->set('data.max_transformation_depth', 6);
         config()->set('data.throw_when_max_transformation_depth_reached', 6);
 
+        config()->set('engagespark.api_key', 'e333ee0937f093dbacc77db00dd5b48a199c4cc8');
+        config()->set('engagespark.org_id', '16089');
+        config()->set('engagespark.sender_id', 'Homeful');
+
+        config()->set('mail.default', 'ses');
+        config()->set('services.ses.key', 'AKIASZKRPTCUF7DQZF43');
+        config()->set('services.ses.secret', '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');
+        config()->set('services.ses.region', 'ap-northeast-1');
+        config()->set('mail.from', '3neti@lyflyn.net');
+
         /*
         $migration = include __DIR__.'/../database/migrations/create_notifications_table.php.stub';
         $migration->up();

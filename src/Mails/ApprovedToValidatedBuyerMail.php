@@ -2,7 +2,7 @@
 
 namespace Homeful\Notifications\Mails;
 
-class ApprovedBuyerMail extends BaseMail
+class ApprovedToValidatedBuyerMail extends BaseMail
 {
     protected function getSubject(): string
     {
@@ -11,6 +11,6 @@ class ApprovedBuyerMail extends BaseMail
 
     protected function getMarkdown(): string
     {
-        return 'homeful::mail.en.approved_buyer'; //homeful::mail.en_PH.approved_buyer if Taglish
+        return 'homeful::mail.en.approved_to_validated_buyer'; //homeful::mail.en_PH.approved_to_validated_buyer if Taglish
     }
 }

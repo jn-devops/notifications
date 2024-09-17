@@ -19,6 +19,8 @@
     This is an automatically generated email, please do not reply.
     Thanks,
     Homeful
+
+{{--    insert qr code/attachment--}}
 {{--    {{ config('app.name') }}--}}
 </x-mail::message>
 

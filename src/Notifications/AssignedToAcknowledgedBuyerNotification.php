@@ -2,15 +2,15 @@
 
 namespace Homeful\Notifications\Notifications;
 
-use Homeful\Notifications\Mails\DocumentSigningBuyerMail;
+use Homeful\Notifications\Mails\AssignedToAcknowledgedBuyerMail;
 use Homeful\Notifications\Mails\BaseMail;
 
-class DocumentSigningBuyerNotification extends BaseNotification
+class AssignedToAcknowledgedBuyerNotification extends BaseNotification
 {
     public function getSMSContent(object $notifiable): string
     {
         return trans(
-            key: 'notifications::messages.document_signing_buyer.sms',
+            key: 'notifications::messages.assigned_to_acknowledged_buyer.sms',
             replace: [
                 'name' => $this->getReferenceData()->lead->name,
                 'reference_code' => $this->getReferenceData()->code
@@ -21,6 +21,6 @@ class DocumentSigningBuyerNotification extends BaseNotification
 
     public function getMail(object $notifiable): BaseMail
     {
-        return new DocumentSigningBuyerMail($this->getReferenceData(), $notifiable);
+        return new AssignedToAcknowledgedBuyerMail($this->getReferenceData(), $notifiable);
     }
 }
